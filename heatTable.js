@@ -8,22 +8,20 @@
     Red   RGB( 244, 113, 113 )
 
     if cell-val > median:
-    // R-units from 95 increase to  244
-    // G-units from 181 decrease to 113
-    // B-units from 244 decrease to 113
+    // R-units increase from 95 to  244
+    // G-units decrease from 181  to 113
+    // B-units decrease from 244  to 113
 
     if cell-val < median:
-    // R-units from 225 decrease to  95
-    // G-units from 255 decrease to 181
-    // B-units from 228 increase to 244
+    // R-units decrease from 225  to  95
+    // G-units decrease from 255  to 181
+    // B-units increase from 228  to 244
 
 */
 
     let selectTable = document.getElementById("myTable_2");
     let selectTds = selectTable.getElementsByTagName("td");
     let tdsLength = selectTds.length;
-
-    console.log( tdsLength )
 
     let tableValuesInArray = [];
 
