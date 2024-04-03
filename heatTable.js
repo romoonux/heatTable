@@ -1,11 +1,11 @@
 
 
-/* 3 colors gradient heat table --------------------------------------------------------------------------------------------------------------- 
+/* 3 colors gradient heat table -------------------------------------------------------------------------------- 
 
     RGBs:
-    Green RGB( 225, 255, 228 )
-    Blue  RGB( 95,  181, 244 )
-    Red   RGB( 244, 113, 113 )
+    Pistachio green RGB( 225, 255, 228 )
+    Medium blue  RGB( 95,  181, 244 )
+    Ligth red   RGB( 244, 113, 113 )
 
     if cell-val > median:
     // R-units increase from 95 to  244
@@ -17,7 +17,7 @@
     // G-units decrease from 255  to 181
     // B-units increase from 228  to 244
 
-*/
+---------------------------------------------------------------------------------------------------------------  */
 
     let selectTable = document.getElementById("myTable_2");
     let selectTds = selectTable.getElementsByTagName("td");
@@ -77,7 +77,7 @@
 
     console.log( medianInTable );
 
-    let getProportionaColorUnits = (tableTds) => {
+    let getProportionalColorUnits = (tableTds) => {
         for ( let i = 0; i < tableTds; i++ ){
             if( ( Number(selectTds[i].innerHTML) ) > medianInTable || Number(selectTds[i].innerHTML) === medianInTable ){
 
@@ -113,6 +113,6 @@
         }
 
     };
-    getProportionaColorUnits( tdsLength )
+    getProportionalColorUnits( tdsLength )
 
     
