@@ -2,20 +2,23 @@
 
 /* 3 colors gradient heat table -------------------------------------------------------------------------------- 
 
+    Required range:
+      R = {ℤ,Q}   
+
     RGBs:
-    Pistachio green RGB( 225, 255, 228 )
-    Medium blue  RGB( 95,  181, 244 )
-    Ligth red   RGB( 244, 113, 113 )
+        Pistachio green  RGB( 225, 255, 228 )
+        Medium blue      RGB( 95,  181, 244 )
+        Ligth red        RGB( 244, 113, 113 )
 
     if cell-val > median:
-    // R-units increase from 95 to  244
-    // G-units decrease from 181  to 113
-    // B-units decrease from 244  to 113
+        R-units increase from 95   to 244
+        G-units decrease from 181  to 113
+        B-units decrease from 244  to 113
 
     if cell-val < median:
-    // R-units decrease from 225  to  95
-    // G-units decrease from 255  to 181
-    // B-units increase from 228  to 244
+        R-units decrease from 225  to  95
+        G-units decrease from 255  to 181
+        B-units increase from 228  to 244
 
 ---------------------------------------------------------------------------------------------------------------  */
 
