@@ -39,7 +39,8 @@
     let finalRGBval;
 
     let generateRandomNumber_X = (min, max) => {
-        return Math.floor( Math.random() * (max - min + 1) + min );
+        // return Math.floor( Math.random() * (max - min + 1) + min );
+        return  Math.random() * (max - min + 1) + min ;
     }
 
     function removeDuplicates(arr) {
