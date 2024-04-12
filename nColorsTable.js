@@ -62,7 +62,7 @@ let arrayRationalPortion = 0
 
 let getColorFromList; // Just while finished
 
-/* ---------------------------------------------- Remove decimals if number si rational */
+/* ---------------------------------------------- Remove decimals if number is rational */
 function removeDecimalsForSum(num) {
     if( num % 1 != 0 ){
         let splitedDecimal = (num + "").split(".")[1]
@@ -75,7 +75,7 @@ function removeDecimalsForSum(num) {
     }
 }
 
-/* ---------------------------------------------- Create an array from RGB values */
+/* ---------------------------------------------- Create RGB values array */
 let getRBGvaluesArray = (color, type) => { 
     var rgb = [];
     var hex;
@@ -135,7 +135,7 @@ let getRBGvaluesArray = (color, type) => {
     }
 }
 
-/* ------------------------------------------------- Get an array Median  */
+/* ------------------------------------------------- Get array Median  */
 let getMedianValInTable = ( arr, min, max ) => {
     const middleIndex = Math.floor( arr.length / 2 );
     if ( arr.length % 2 === 0 ) {
@@ -251,10 +251,12 @@ let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber,
     return finalRGBval 
 }
 
+
+/* -------------------------------------------  Calculate and apply RGB values to each cell in the table   */
 let RGBvalues
 let arrayMedian = [];
 
-let getProportionaRangesInTable = ( lengthX ) => {
+let calculateAnApplyRGBvalues = ( lengthX ) => {
     arrayRationalPortion = gradientProportions + newProportionForMaxMin
 
     currentMinNumber = selectTds[ 0 ].innerHTML;
@@ -333,6 +335,6 @@ let getProportionaRangesInTable = ( lengthX ) => {
     // console.log( "[[ ARRAY ]]]" ) 
     // console.log( JSON.stringify(arrayMedian) )
 }
-getProportionaRangesInTable( tdsLength );
+calculateAnApplyRGBvalues( tdsLength );
 
 
