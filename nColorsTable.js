@@ -256,7 +256,7 @@ let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber,
 let RGBvalues
 let arrayMedian = [];
 
-let calculateAnApplyRGBvalues = ( lengthX ) => {
+let calculateAndApplyRGBvalues = ( lengthX ) => {
     arrayRationalPortion = gradientProportions + newProportionForMaxMin
 
     currentMinNumber = selectTds[ 0 ].innerHTML;
@@ -335,6 +335,6 @@ let calculateAnApplyRGBvalues = ( lengthX ) => {
     // console.log( "[[ ARRAY ]]]" ) 
     // console.log( JSON.stringify(arrayMedian) )
 }
-calculateAnApplyRGBvalues( tdsLength );
+calculateAndApplyRGBvalues( tdsLength );
 
 
