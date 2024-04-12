@@ -44,8 +44,6 @@ for (let i = 0; i < tdsLength; i++){
     Number( selectTds[i].innerHTML = sortedArrayX[i].toFixed(3) ) /* Number in base 10 with 3 digits after the decimal point */
 }
 
-// console.log( JSON.stringify( removeDuplicates(sortedArrayX)) );
-
 /* ----------------------------------------------------------- Iterate over selected colors list */
 
 let selectColorsBox = document.getElementById("list");
@@ -54,7 +52,7 @@ let selectColorDivsLength = selectColorDivs.length;
 
 let gradientProportions = tdsLength/selectColorDivsLength // Math.floor( tdsLength/selectColorDivsLength)
 
-console.log( "selectColorDivsLength "+selectColorDivsLength )
+console.log( "Colors length "+selectColorDivsLength )
 // console.log("gradientProportions "+gradientProportions)
 
 let arrayProportionalCounter = 0
@@ -162,13 +160,13 @@ function rgbToHex(r, g, b) {
 /* ------------------------------------------- Create selected colors JSON object */
 
 let createEachColorObject = () => {
-        this.shelf = []; 
-        for( var i = 0; i < selectColorDivsLength; i++ ){
-            this.shelf.push(
-                getRBGvaluesArray(selectColorDivs[i].style.backgroundColor,'obj')
-            ); 
-        }
-        return this.shelf 
+    this.shelf = []; 
+    for( var i = 0; i < selectColorDivsLength; i++ ){
+        this.shelf.push(
+            getRBGvaluesArray(selectColorDivs[i].style.backgroundColor,'obj')
+        ); 
+    }
+    return this.shelf 
 }
 
 let colorsObject = {
@@ -177,10 +175,6 @@ let colorsObject = {
     active: true,
     colors: createEachColorObject()
 }
-
-let parsingColorsJSONx = JSON.parse(JSON.stringify(colorsObject))
-
-console.log( parsingColorsJSONx )
 
 /* -------------------------------------------  Calculate RGB values */
 
@@ -206,9 +200,9 @@ let blue2nd
 
 let parsingColorsJSON
 parsingColorsJSON = JSON.parse(JSON.stringify(colorsObject))
+console.log( parsingColorsJSON )
+
 let newIc
-
-
 let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber, index ) => {
 
     newIc = index+1
@@ -268,7 +262,7 @@ let getProportionaRangesInTable = ( lengthX ) => {
 
     for ( let i = 0; i < lengthX; i++ ){
  
-        /** Check if proportion is Rational  */
+        /* Check if proportion is Rational */
         if( arrayRationalPortion % 1 != 0 ){
 
             console.log( "DECIMAL " + i)
@@ -279,13 +273,10 @@ let getProportionaRangesInTable = ( lengthX ) => {
                 arrayProportionalCounter+=1
                 arrayRationalPortion += gradientProportions + newProportionForMaxMin
 
-                console.log( 'arrayRationalPortion D  ' + arrayRationalPortion)
-
                 if( arrayRationalPortion===lengthX  ){
                     console.log( '----- Final iteration D -----' + i)
                     currentMinNumber = selectTds[ i ].innerHTML;
                     currentMaxNumber = selectTds[ lengthX-1 ].innerHTML;
-
                 }
 
                 if( Number(arrayRationalPortion) < lengthX){
@@ -294,7 +285,7 @@ let getProportionaRangesInTable = ( lengthX ) => {
                     arrayMedian = []
                 }
 
-                console.log('******** We are in part A ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
+                console.log('******** We are in part D - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
             }
 
             // This IF makes Index work inside of the color selection function
@@ -304,7 +295,7 @@ let getProportionaRangesInTable = ( lengthX ) => {
             selectTds[i].style.backgroundColor = RGBvalues 
         }
 
-        /* /** Check if proportion is Integer */
+        /* Check if proportion is Integer */
         if( arrayRationalPortion % 1 === 0 ){
 
             console.log( "INTEGER "  + i )
@@ -314,8 +305,6 @@ let getProportionaRangesInTable = ( lengthX ) => {
             if( i === arrayRationalPortion ){ 
                 arrayProportionalCounter+=1
                 arrayRationalPortion += gradientProportions + newProportionForMaxMin
-
-                console.log( 'arrayRationalPortion I  ' + arrayRationalPortion)
 
                 if( arrayRationalPortion===lengthX  ){
                     console.log( '-----Final iteration I -----' + i )
@@ -329,7 +318,7 @@ let getProportionaRangesInTable = ( lengthX ) => {
 
                     arrayMedian = []
                 }
-                console.log('******** We are in part B  ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
+                console.log('******** We are in part B - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
             }
 
             // This IF makes Index work inside of the color selection function
