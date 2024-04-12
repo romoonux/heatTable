@@ -1,4 +1,15 @@
 
+
+/* N colors gradient heat table ---------------------------------------------- 
+
+    Required range:
+    R = {ℤ,Q}  
+
+    Required colors:
+    N
+*/
+
+
 /* ------------------------------------ Iterate over table and asign random numbers on a range  */
 
 let selectTable = document.getElementById("myTable_2");
