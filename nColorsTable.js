@@ -10,7 +10,7 @@
 */
 
 
-/* ------------------------------------ Iterate over table and asign random numbers on a range  */
+/* ------------------------------------ Create random numbers from 2 number range and add those numbers to each table cell  */
 
 let selectTable = document.getElementById("myTable_2");
 let selectTds = selectTable.getElementsByTagName("td");
