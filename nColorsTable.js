@@ -62,7 +62,7 @@ let arrayRationalPortion = 0
 
 let getColorFromList; // Just while finished
 
-/* ---------------------------------------------- Remove decimals if number is rational */
+/* ---------------------------------------------- Remove decimals if number si rational */
 function removeDecimalsForSum(num) {
     if( num % 1 != 0 ){
         let splitedDecimal = (num + "").split(".")[1]
@@ -75,7 +75,7 @@ function removeDecimalsForSum(num) {
     }
 }
 
-/* ---------------------------------------------- Create RGB values array */
+/* ---------------------------------------------- Create an array from RGB values */
 let getRBGvaluesArray = (color, type) => { 
     var rgb = [];
     var hex;
@@ -135,7 +135,7 @@ let getRBGvaluesArray = (color, type) => {
     }
 }
 
-/* ------------------------------------------------- Get array Median  */
+/* ------------------------------------------------- Get an array Median  */
 let getMedianValInTable = ( arr, min, max ) => {
     const middleIndex = Math.floor( arr.length / 2 );
     if ( arr.length % 2 === 0 ) {
@@ -251,90 +251,97 @@ let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber,
     return finalRGBval 
 }
 
-
-/* -------------------------------------------  Calculate and apply RGB values to each cell in the table   */
 let RGBvalues
 let arrayMedian = [];
 
-let calculateAndApplyRGBvalues = ( lengthX ) => {
+let getProportionaRangesInTable = ( lengthX ) => {
     arrayRationalPortion = gradientProportions + newProportionForMaxMin
 
     currentMinNumber = selectTds[ 0 ].innerHTML;
     currentMaxNumber = selectTds[ Math.trunc(arrayRationalPortion) ].innerHTML;
 
-    for ( let i = 0; i < lengthX; i++ ){
+    for( let i = 0; i < lengthX; i++ ){
+        console.log( "i " + i)
+        console.log( "lengthX " + selectColorDivsLength)
+        console.log( "tdsLength " + tdsLength)
+
+        if( selectColorDivsLength > tdsLength  ){
+            selectTds[i].style.backgroundColor = 'rgb(' +  Number(parsingColorsJSON.colors[i].red)+ ',' + Number(parsingColorsJSON.colors[i].green) + ',' + Number(parsingColorsJSON.colors[i].blue)+ ')';
+        }else{
  
-        /* Check if proportion is Rational */
-        if( arrayRationalPortion % 1 != 0 ){
+            /* Check if proportion is Rational */
+            if( arrayRationalPortion % 1 != 0 ){
 
-            console.log( "DECIMAL " + i)
-            arrayMedian.push( selectTds[ i ].innerHTML )
-            
-            if( (i+removeDecimalsForSum(arrayRationalPortion)) === (Number(arrayRationalPortion) ) ){
+                console.log( "DECIMAL " + i)
+                arrayMedian.push( selectTds[ i ].innerHTML )
+                
+                if( (i+removeDecimalsForSum(arrayRationalPortion)) === (Number(arrayRationalPortion) ) ){
 
-                arrayProportionalCounter+=1
-                arrayRationalPortion += gradientProportions + newProportionForMaxMin
+                    arrayProportionalCounter+=1
+                    arrayRationalPortion += gradientProportions + newProportionForMaxMin
 
-                if( arrayRationalPortion===lengthX  ){
-                    console.log( '----- Final iteration D -----' + i)
-                    currentMinNumber = selectTds[ i ].innerHTML;
-                    currentMaxNumber = selectTds[ lengthX-1 ].innerHTML;
+                    if( arrayRationalPortion===lengthX  ){
+                        console.log( '----- Final iteration D -----' + i)
+                        currentMinNumber = selectTds[ i ].innerHTML;
+                        currentMaxNumber = selectTds[ lengthX-1 ].innerHTML;
+                    }
+
+                    if( Number(arrayRationalPortion) < lengthX){
+                        currentMinNumber = selectTds[ i+1 ].innerHTML;
+                        currentMaxNumber = selectTds[ Math.trunc(arrayRationalPortion) ].innerHTML;
+                        arrayMedian = []
+                    }
+
+                    console.log('******** We are in part D - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
                 }
 
-                if( Number(arrayRationalPortion) < lengthX){
-                    currentMinNumber = selectTds[ i+1 ].innerHTML;
-                    currentMaxNumber = selectTds[ Math.trunc(arrayRationalPortion) ].innerHTML;
-                    arrayMedian = []
+                // This IF makes Index work inside of the color selection function
+                if( arrayProportionalCounter < selectColorDivsLength-1 ){
+                    RGBvalues = calculateRGBvaluesX ( i, Number(currentMinNumber), Number( currentMaxNumber), arrayProportionalCounter ) 
+                }
+                selectTds[i].style.backgroundColor = RGBvalues 
+            }
+
+            /* Check if proportion is Integer */
+            if( arrayRationalPortion % 1 === 0 ){
+
+                console.log( "INTEGER "  + i )
+                arrayMedian.push( selectTds[ i ].innerHTML )
+
+                
+                if( i === arrayRationalPortion ){ 
+                    arrayProportionalCounter+=1
+                    arrayRationalPortion += gradientProportions + newProportionForMaxMin
+
+                    if( arrayRationalPortion===lengthX  ){
+                        console.log( '-----Final iteration I -----' + i )
+                        currentMinNumber = selectTds[ i ].innerHTML;
+                        currentMaxNumber = selectTds[ lengthX-1 ].innerHTML;
+                    }
+
+                    if( Number(arrayRationalPortion) < lengthX){
+                        currentMinNumber = selectTds[ i+1 ].innerHTML;
+                        currentMaxNumber = selectTds[ Math.trunc(arrayRationalPortion) ].innerHTML;
+
+                        arrayMedian = []
+                    }
+                    console.log('******** We are in part B - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
                 }
 
-                console.log('******** We are in part D - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
-            }
-
-            // This IF makes Index work inside of the color selection function
-            if( arrayProportionalCounter < selectColorDivsLength-1 ){
-                RGBvalues = calculateRGBvaluesX ( i, Number(currentMinNumber), Number( currentMaxNumber), arrayProportionalCounter ) 
-            }
-            selectTds[i].style.backgroundColor = RGBvalues 
-        }
-
-        /* Check if proportion is Integer */
-        if( arrayRationalPortion % 1 === 0 ){
-
-            console.log( "INTEGER "  + i )
-            arrayMedian.push( selectTds[ i ].innerHTML )
-
-            
-            if( i === arrayRationalPortion ){ 
-                arrayProportionalCounter+=1
-                arrayRationalPortion += gradientProportions + newProportionForMaxMin
-
-                if( arrayRationalPortion===lengthX  ){
-                    console.log( '-----Final iteration I -----' + i )
-                    currentMinNumber = selectTds[ i ].innerHTML;
-                    currentMaxNumber = selectTds[ lengthX-1 ].innerHTML;
+                // This IF makes Index work inside of the color selection function
+                if( arrayProportionalCounter < selectColorDivsLength-1 ){
+                    RGBvalues = calculateRGBvaluesX ( i, Number(currentMinNumber), Number( currentMaxNumber), arrayProportionalCounter ) 
                 }
+                
+                selectTds[i].style.backgroundColor = RGBvalues
 
-                if( Number(arrayRationalPortion) < lengthX){
-                    currentMinNumber = selectTds[ i+1 ].innerHTML;
-                    currentMaxNumber = selectTds[ Math.trunc(arrayRationalPortion) ].innerHTML;
+            } 
+        } /* END if-else: if( selectColorDivsLength > tdsLength  )*/
+    }/* END for( let i = 0; i < lengthX; i++ )  */
 
-                    arrayMedian = []
-                }
-                console.log('******** We are in part B - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
-            }
-
-            // This IF makes Index work inside of the color selection function
-            if( arrayProportionalCounter < selectColorDivsLength-1 ){
-                RGBvalues = calculateRGBvaluesX ( i, Number(currentMinNumber), Number( currentMaxNumber), arrayProportionalCounter ) 
-            }
-            
-            selectTds[i].style.backgroundColor = RGBvalues
-
-        } 
-    }
     // console.log( "[[ ARRAY ]]]" ) 
     // console.log( JSON.stringify(arrayMedian) )
 }
-calculateAndApplyRGBvalues( tdsLength );
+getProportionaRangesInTable( tdsLength );
 
 
