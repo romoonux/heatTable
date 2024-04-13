@@ -336,7 +336,7 @@ let getProportionaRangesInTable = ( lengthX ) => {
                 selectTds[i].style.backgroundColor = RGBvalues
 
             } 
-        } /* END if-else: if( selectColorDivsLength > tdsLength  )*/
+        } /* END else: if( selectColorDivsLength > tdsLength  )*/
     }/* END for( let i = 0; i < lengthX; i++ )  */
 
     // console.log( "[[ ARRAY ]]]" ) 
