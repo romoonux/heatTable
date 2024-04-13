@@ -62,7 +62,7 @@ let arrayRationalPortion = 0
 
 let getColorFromList; // Just while finished
 
-/* ---------------------------------------------- Remove decimals if number si rational */
+/* ---------------------------------------------- Remove decimals if number is rational */
 function removeDecimalsForSum(num) {
     if( num % 1 != 0 ){
         let splitedDecimal = (num + "").split(".")[1]
