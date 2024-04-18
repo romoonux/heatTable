@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 /* N colors gradient heat table ---------------------------------------------- 
 
     Required range:
@@ -208,7 +199,7 @@ let blue2nd
 
 let parsingColorsJSON
 parsingColorsJSON = JSON.parse(JSON.stringify(colorsObject))
-console.log( parsingColorsJSON )
+// console.log( parsingColorsJSON )
 
 let newIc
 let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber, index ) => {
@@ -274,9 +265,6 @@ let getProportionaRangesInTable = ( lengthX ) => {
     currentMaxNumber = selectTds[ Math.trunc(arrayRationalPortion) ].innerHTML;
 
     for( let i = 0; i < lengthX; i++ ){
-        console.log( "i " + i)
-        console.log( "lengthX " + selectColorDivsLength)
-        console.log( "tdsLength " + tdsLength)
 
         if( selectColorDivsLength > tdsLength  ){
             selectTds[i].style.backgroundColor = 'rgb(' +  Number(parsingColorsJSON.colors[i].red)+ ',' + Number(parsingColorsJSON.colors[i].green) + ',' + Number(parsingColorsJSON.colors[i].blue)+ ')';
@@ -285,7 +273,7 @@ let getProportionaRangesInTable = ( lengthX ) => {
             /* Check if proportion is Rational */
             if( arrayRationalPortion % 1 != 0 ){
 
-                console.log( "DECIMAL " + i)
+                // console.log( "DECIMAL " + i)
                 arrayMedian.push( selectTds[ i ].innerHTML )
                 
                 if( (i+removeDecimalsForSum(arrayRationalPortion)) === (Number(arrayRationalPortion) ) ){
@@ -299,7 +287,7 @@ let getProportionaRangesInTable = ( lengthX ) => {
                     }
 
                     if( arrayRationalPortion===lengthX  ){
-                        console.log( '----- Final iteration D -----' + i)
+                        // console.log( '----- Final iteration D -----' + i)
                         currentMinNumber = selectTds[ i ].innerHTML;
                         currentMaxNumber = selectTds[ lengthX-1 ].innerHTML;
                     }
@@ -310,7 +298,7 @@ let getProportionaRangesInTable = ( lengthX ) => {
                         arrayMedian = []
                     }
 
-                    console.log('******** We are in part D - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
+                    // console.log('******** We are in part D - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
                 }
 
                 
@@ -332,10 +320,9 @@ let getProportionaRangesInTable = ( lengthX ) => {
             /* Check if proportion is Integer */
             if( arrayRationalPortion % 1 === 0 ){
 
-                console.log( "INTEGER "  + i )
+                // console.log( "INTEGER "  + i )
                 arrayMedian.push( selectTds[ i ].innerHTML )
 
-                
                 if( i === arrayRationalPortion ){ 
 
                     if(selectColorDivsLength===2){
@@ -344,10 +331,9 @@ let getProportionaRangesInTable = ( lengthX ) => {
                         arrayProportionalCounter+=1
                         arrayRationalPortion += gradientProportions + newProportionForMaxMin
                     }
-                    
 
                     if( arrayRationalPortion===lengthX  ){
-                        console.log( '-----Final iteration I -----' + i )
+                        // console.log( '-----Final iteration I -----' + i )
                         currentMinNumber = selectTds[ i ].innerHTML;
                         currentMaxNumber = selectTds[ lengthX-1 ].innerHTML;
                     }
@@ -358,7 +344,7 @@ let getProportionaRangesInTable = ( lengthX ) => {
 
                         arrayMedian = []
                     }
-                    console.log('******** We are in part B - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
+                    // console.log('******** We are in part B - ' + arrayProportionalCounter + ' / arrayRationalPortion ' + arrayRationalPortion )
                 }
 
                 
@@ -395,102 +381,120 @@ startX( tdsLength )
 
 
 
+/* -------------------------------------------  Select colors box */
+
+let selectColorsBox = document.getElementById("list");
+let selectColorInput = selectColorsBox.getElementsByTagName("input");
+let selectColor = selectColorsBox.getElementsByClassName("inside");
+let colorsLength = selectColorInput.length;
+
+console.log( "colorsLength "+colorsLength )
 
 
-function sortable(section, onUpdate){
-    var dragEl, nextEl, newPos, dragGhost;
- 
-    let oldPos = [...section.children].map(item => {
-      item.draggable = true
-      let pos = document.getElementById(item.id).getBoundingClientRect();
-      return pos;
-    });
-   
-    function _onDragOver(e){
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-        
-        var target = e.target;
-        if( target && target !== dragEl && target.nodeName == 'DIV' ){
-          if(target.classList.contains('inside')) {
-            e.stopPropagation();
-          } else {
-      //getBoundinClientRect contains location-info about the element (relative to the viewport)
-          var targetPos = target.getBoundingClientRect();
-           //checking that dragEl is dragged over half the target y-axis or x-axis. (therefor the .5)
-          var next = (e.clientY - targetPos.top) / (targetPos.bottom - targetPos.top) > .5 || (e.clientX - targetPos.left) / (targetPos.right - targetPos.left) > .5;    
-            section.insertBefore(dragEl, next && target.nextSibling || target);
-             
-            /*  console.log("oldPos:" + JSON.stringify(oldPos));
-             console.log("newPos:" + JSON.stringify(newPos)); */
-             /* console.log(newPos.top === oldPos.top ? 'They are the same' : 'Not the same'); */
-           console.log(oldPos);
-            }
-        }   
+function clickOnColorInput(){
+    console.log( this ) 
+    for( var i = 0; i < colorsLength; i++ ){
+        selectColorInput[i].click();
     }
-    
-    function _onDragEnd(evt){
-        evt.preventDefault();
-        newPos = [...section.children].map(child => {      
-             let pos = document.getElementById(child.id).getBoundingClientRect();
-             return pos;
-           });
-        console.log(newPos);
-        dragEl.classList.remove('ghost');
-        section.removeEventListener('dragover', _onDragOver, false);
-        section.removeEventListener('dragend', _onDragEnd, false);
-
-        nextEl !== dragEl.nextSibling ? onUpdate(dragEl) : false;
-
-        startX( tdsLength )
-    }
-       
-      section.addEventListener('dragstart', function(e){     
-        dragEl = e.target; 
-        nextEl = dragEl.nextSibling;
-        /* dragGhost = dragEl.cloneNode(true);
-        dragGhost.classList.add('hidden-drag-ghost'); */
-        
-       /*  document.body.appendChild(dragGhost);
-        e.dataTransfer.setDragImage(dragGhost, 0, 0); */
-    
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('Text', dragEl.textContent);
-      
-        section.addEventListener('dragover', _onDragOver, false);
-        section.addEventListener('dragend', _onDragEnd, false);
-         
-        setTimeout(function (){
-            dragEl.classList.add('ghost');
-        }, 0)
-       
-    });
+    // console.log( this ) 
 }
-                                          
-sortable( document.getElementById('list'), function (item){
-    /* console.log(item); */
+
+function clickEachColor(){
+    selectColorsBox = document.getElementById("list");
+    selectColorInput = selectColorsBox.getElementsByTagName("input");
+    selectColor = selectColorsBox.getElementsByClassName("inside");
+    colorsLength = selectColorInput.length;
+
+    for( var i = 0; i < colorsLength; i++ ){
+        selectColor[i].addEventListener("click", clickOnColorInput) // In this case, 'this' from clickOnColorInput() prints HTML element explicity
+    }       
+}  
+clickEachColor()
+
+let actionsBox = document.querySelector(".actionsBox");
+let addButtonclick = document.querySelector(".buttonAddColor");
+let addButtonInputBox = document.querySelector(".addColorInput");
+let addButtonInput = document.querySelector("#adColor");
+
+const randomHexColorCode = () => {
+    let n = (Math.random() * 0xfffff * 1000000).toString(16);
+    return '#' + n.slice(0, 6);
+};
+  
+
+new Sortable(list, {
+    swapThreshold: 1,
+    animation: 150,
+    onEnd: function(){ 
+        startX( tdsLength ); 
+    },
+    direction: 'horizontal' ,
+    group: "items",
+   
+});
+
+new Sortable(deleteColor, {
+    group: "items",
+    onAdd: function (evt) {
+        selectColorsBox = document.getElementById("list");
+    //     selectColorDivs = selectColorsBox.getElementsByClassName("gradientSelectedColor");
+    //     selectColorDivsLength = selectColorDivs.length;
+        this.el.removeChild(evt.item);
+        startX( tdsLength );
+
+        if(  selectColorDivsLength === 2  ){
+            console.log( true ) 
+            // return true
+        }else if( selectColorDivsLength > 2 ){
+            console.log( false ) 
+            //  return false
+        }
+    }
+    // disabled: function(){
+    //     selectColorsBox = document.getElementById("list");
+    //     selectColorDivs = selectColorsBox.getElementsByClassName("gradientSelectedColor");
+    //     selectColorDivsLength = selectColorDivs.length;
+
+    //     if(  selectColorDivsLength === 2  ){
+    //         console.log( true ) 
+    //         return true
+    //     }else if( selectColorDivsLength > 2 ){
+    //         console.log( false ) 
+    //          return false
+    //     }
+    // }
+});
+
+Coloris({
+    themeMode: 'dark',
+    alpha: false,
+    format: 'rgb',
 });
 
 
 
+let addColor = () => {
+    let newHexTemplate = randomHexColorCode()
+
+    let colorTemplate = `
+        <div class='gradientSelectedColor mx-1' style="background-color:` + newHexTemplate+ `;">
+            <div class='inside' style="background-color:` + newHexTemplate+ `;" ></div>
+            <div class="colorSelectionInput">
+                <input type="text" data-coloris>
+            </div>
+        </div>
+    `
+
+    console.log( "this" ) 
+    // addButtonInput.click();
+    selectColorsBox.innerHTML+=colorTemplate
+    startX( tdsLength )
+    clickEachColor()
+};
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+addButtonclick.addEventListener("click", addColor );
 
 
 
