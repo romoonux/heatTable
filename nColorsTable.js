@@ -1,4 +1,3 @@
-
 /* N colors gradient heat table ---------------------------------------------- 
 
     Required range:
@@ -204,6 +203,7 @@ parsingColorsJSON = JSON.parse(JSON.stringify(colorsObject))
 
 let newIc
 let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber, index ) => {
+
     newIc = index+1
 
     red1st    =  Number(parsingColorsJSON.colors[index].red)
@@ -214,37 +214,29 @@ let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber,
     blue2nd   =  Number(parsingColorsJSON.colors[newIc].blue)
 
     /* RED */
-    if( red1st > red2nd ){
+    if( red1st > red2nd  ||  green1st > green2nd   ||   blue1st > blue2nd  ){
         rUnits = (red1st - red2nd)  / (maxCurrentNumber-minCurrentNumber);
         applyed_R_units = red1st - ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * rUnits );
-    }else if( red1st < red2nd ){
-        rUnits = (red2nd - red1st )  / (maxCurrentNumber-minCurrentNumber);
-        applyed_R_units = red1st + ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * rUnits );
-    }else if( red1st === red2nd ){
-        applyed_R_units = red1st
-    }
 
-    /* GREEN */
-    if( green1st > green2nd ){
         gUnits = (green1st - green2nd)  / (maxCurrentNumber-minCurrentNumber);
         applyed_G_units = green1st - ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * gUnits );
-    }else if( green1st < green2nd ){
-        gUnits = (green2nd - green1st )  / (maxCurrentNumber-minCurrentNumber);
-        applyed_G_units = green1st + ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * gUnits );
-    }else if( green1st === green2nd ){
-        applyed_G_units = green1st
-    }
 
-    /* BLUE */
-    if( blue1st > blue2nd ){
         bUnits = (blue1st - blue2nd )  / (maxCurrentNumber-minCurrentNumber);
         applyed_B_units = blue1st - ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * bUnits );
-    }else if( blue1st < blue2nd ){
-        bUnits = (blue2nd - blue1st )  / (maxCurrentNumber-minCurrentNumber);
-        applyed_B_units = blue1st + ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * bUnits );
-    }else if( blue1st === blue2nd ){
+
+    }else if( red1st < red2nd ||  green1st < green2nd   ||   blue1st < blue2nd   ){
+        rUnits = (red2nd - red1st )  / (maxCurrentNumber-minCurrentNumber);
+        applyed_R_units = red1st + ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * rUnits );
+
+        gUnits = (green2nd - green1st )  / (maxCurrentNumber-minCurrentNumber);
+        applyed_G_units = green1st + ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * gUnits );
+        
+    }else if( red1st === red2nd  ||  green1st === green2nd   ||   blue1st === blue2nd ){
+        applyed_R_units = red1st
+        applyed_G_units = green1st
         applyed_B_units = blue1st
     }
+
 
     finalRGBval = 'rgb(' + applyed_R_units+ ',' +applyed_G_units+ ',' +applyed_B_units+ ')';
     return finalRGBval 
@@ -376,6 +368,11 @@ startX( tdsLength )
 
 
 
+
+
+
+
+
 /* -------------------------------------------  Select colors box */
 
 let selectColorsBox = document.getElementById("list");
@@ -391,6 +388,7 @@ function clickOnColorInput(){
     for( var i = 0; i < colorsLength; i++ ){
         selectColorInput[i].click();
     }
+    // console.log( this ) 
 }
 
 function clickEachColor(){
@@ -431,13 +429,18 @@ new Sortable(deleteColor, {
     group: "items",
     onAdd: function (evt) {
         this.el.removeChild(evt.item);
-        startX( tdsLength );   
+        startX( tdsLength );
+
     }
 });
 
 
+
+
+
 let addColor = () => {
     let newHexTemplate = randomHexColorCode()
+
     let colorTemplate = `
         <div class='gradientSelectedColor mx-1' style="background-color:` + newHexTemplate+ `;">
             <div class='inside' style="background-color:` + newHexTemplate+ `;" ></div>
@@ -448,11 +451,13 @@ let addColor = () => {
     `
 
     console.log( "this" ) 
+    // addButtonInput.click();
     selectColorsBox.innerHTML+=colorTemplate
-    
     startX( tdsLength )
     clickEachColor()
 };
+
+
 
 addButtonclick.addEventListener("click", addColor );
 
