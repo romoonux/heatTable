@@ -442,13 +442,7 @@ new Sortable(deleteColor, {
         this.el.removeChild(evt.item);
         startX( tdsLength );
 
-        if(  selectColorDivsLength === 2  ){
-            console.log( true ) 
-            // return true
-        }else if( selectColorDivsLength > 2 ){
-            console.log( false ) 
-            //  return false
-        }
+        
     }
     // disabled: function(){
     //     selectColorsBox = document.getElementById("list");
@@ -465,11 +459,6 @@ new Sortable(deleteColor, {
     // }
 });
 
-Coloris({
-    themeMode: 'dark',
-    alpha: false,
-    format: 'rgb',
-});
 
 
 
