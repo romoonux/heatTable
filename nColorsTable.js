@@ -229,6 +229,9 @@ let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber,
 
         gUnits = (green2nd - green1st )  / (maxCurrentNumber-minCurrentNumber);
         applyed_G_units = green1st + ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * gUnits );
+
+        bUnits = (blue2nd - blue1st )  / (maxCurrentNumber-minCurrentNumber);
+        applyed_B_units = blue1st + ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * bUnits );
         
     }else if( red1st === red2nd  ||  green1st === green2nd   ||   blue1st === blue2nd ){
         applyed_R_units = red1st
