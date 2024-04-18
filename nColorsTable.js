@@ -213,7 +213,6 @@ let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber,
     blue1st   =  Number(parsingColorsJSON.colors[index].blue )
     blue2nd   =  Number(parsingColorsJSON.colors[newIc].blue)
 
-    /* RED */
     if( red1st > red2nd  ||  green1st > green2nd   ||   blue1st > blue2nd  ){
         rUnits = (red1st - red2nd)  / (maxCurrentNumber-minCurrentNumber);
         applyed_R_units = red1st - ( (( Number(selectTds[currentCellIndex].innerHTML) - minCurrentNumber) )  * rUnits );
