@@ -1,3 +1,4 @@
+
 /* N colors gradient heat table ---------------------------------------------- 
 
     Required range:
@@ -203,7 +204,6 @@ parsingColorsJSON = JSON.parse(JSON.stringify(colorsObject))
 
 let newIc
 let calculateRGBvaluesX = (currentCellIndex, minCurrentNumber, maxCurrentNumber, index ) => {
-
     newIc = index+1
 
     red1st    =  Number(parsingColorsJSON.colors[index].red)
@@ -376,11 +376,6 @@ startX( tdsLength )
 
 
 
-
-
-
-
-
 /* -------------------------------------------  Select colors box */
 
 let selectColorsBox = document.getElementById("list");
@@ -396,7 +391,6 @@ function clickOnColorInput(){
     for( var i = 0; i < colorsLength; i++ ){
         selectColorInput[i].click();
     }
-    // console.log( this ) 
 }
 
 function clickEachColor(){
@@ -436,35 +430,14 @@ new Sortable(list, {
 new Sortable(deleteColor, {
     group: "items",
     onAdd: function (evt) {
-        selectColorsBox = document.getElementById("list");
-    //     selectColorDivs = selectColorsBox.getElementsByClassName("gradientSelectedColor");
-    //     selectColorDivsLength = selectColorDivs.length;
         this.el.removeChild(evt.item);
-        startX( tdsLength );
-
-        
+        startX( tdsLength );   
     }
-    // disabled: function(){
-    //     selectColorsBox = document.getElementById("list");
-    //     selectColorDivs = selectColorsBox.getElementsByClassName("gradientSelectedColor");
-    //     selectColorDivsLength = selectColorDivs.length;
-
-    //     if(  selectColorDivsLength === 2  ){
-    //         console.log( true ) 
-    //         return true
-    //     }else if( selectColorDivsLength > 2 ){
-    //         console.log( false ) 
-    //          return false
-    //     }
-    // }
 });
-
-
 
 
 let addColor = () => {
     let newHexTemplate = randomHexColorCode()
-
     let colorTemplate = `
         <div class='gradientSelectedColor mx-1' style="background-color:` + newHexTemplate+ `;">
             <div class='inside' style="background-color:` + newHexTemplate+ `;" ></div>
@@ -475,13 +448,11 @@ let addColor = () => {
     `
 
     console.log( "this" ) 
-    // addButtonInput.click();
     selectColorsBox.innerHTML+=colorTemplate
+    
     startX( tdsLength )
     clickEachColor()
 };
-
-
 
 addButtonclick.addEventListener("click", addColor );
 
