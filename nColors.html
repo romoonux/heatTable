@@ -8,38 +8,36 @@
     <link rel="icon" sizes="192x192" href="img/icon.png">
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body class="bg-light">
-    <div class="mx-5 position-relative">
+    <div class="catMessagebox catImgBox">
+        <img src="img/cat.png" width="100%" alt="">
+    </div>
+    <div class="mx-5 my-3 position-relative">
         <div class="row py-3">
                 <div class="col-md-12 float-right">
 
                     <div id="list" class="position-relative"> 
                         <div class='gradientSelectedColor mx-1'  style="background-color: #fff800;">
                             <div class='inside' style="background-color: #fff800;"></div>
-                            
-                                <input type="text" data-coloris>
-                            
+                            <input type="text" data-coloris>
                         </div>
                         <div class='gradientSelectedColor mx-1' style="background-color: #ff00c0;">
                             <div class='inside' style="background-color: #ff00c0;"></div>
-                            
-                                <input type="text" data-coloris>
-                            
+                            <input type="text" data-coloris>
                         </div>
                         <div class='gradientSelectedColor mx-1' style="background-color: #ff7f03;">
                             <div class='inside' style="background-color: #ff7f03;"></div>
-                            
-                                <input type="text" data-coloris>
-                            
+                            <input type="text" data-coloris>
                         </div>
                     </div>
 
                     <div class="actionsBox mx-3">
-                        <div id="deleteColor" class="buttonDeleteColor mx-3">
+                        <div class="blockDeleteBox"></div>
+                        <div id="deleteColor" ondragover="allowDrop(event)" class="buttonDeleteColor mx-3">
                             <img  src="img/trash.png" alt="">
                         </div>
                         <div class="divAddColor buttonAddColor">
@@ -52,7 +50,7 @@
         </div>
     </div>
 
-    <div id="mainDiv" class="m-5 border rounded-3  bg-white d-block" style="border-color:#000 !important">
+    <div id="mainDiv" class="mx-5 border rounded-3  bg-white d-block" style="border-color:#000 !important">
         <table id="myTable_2" class="table m-0 bg-white">
             <thead>
                 <tr>
