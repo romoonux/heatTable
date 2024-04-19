@@ -14,12 +14,9 @@ let tdsLength = selectTds.length;
 let startX = (tdsLength) => { 
 /* ------------------------------------ Create random numbers from 2 number range and add those numbers to each table cell  */
 
-
-
 // console.log( tdsLength )
 
 let tableValuesInArray = [];
-
 
 let generateRandomNumber_X = (min, max) => {
     return Math.random() * (max - min + 1) + min ;
@@ -49,17 +46,10 @@ for (let i = 0; i < tdsLength; i++){
 let selectColorsBox = document.getElementById("list");
 let selectColorDivs = selectColorsBox.getElementsByClassName("gradientSelectedColor");
 let selectColorDivsLength = selectColorDivs.length;
-
 let gradientProportions = tdsLength/selectColorDivsLength // Math.floor( tdsLength/selectColorDivsLength)
-
-console.log( "Colors length "+selectColorDivsLength )
-// console.log("gradientProportions "+gradientProportions)
-
 let arrayProportionalCounter = 0
-
 let newProportionForMaxMin = ( gradientProportions / (selectColorDivsLength-1 ) )
 let arrayRationalPortion = 0
-
 
 /* ---------------------------------------------- Remove decimals if number is rational */
 function removeDecimalsForSum(num) {
@@ -374,13 +364,6 @@ startX( tdsLength )
 
 
 
-
-
-
-
-
-
-
 /* -------------------------------------------  Select colors box */
 
 let selectColorsBox = document.getElementById("list");
@@ -389,21 +372,12 @@ let selectColorInput = selectColorsBox.getElementsByTagName("input");
 let selectColor = selectColorsBox.getElementsByClassName("inside");
 let colorsInputLength = selectColorInput.length;
 
-console.log( "colorsInputLength "+colorsInputLength )
-
-
-
 let addedIndex
 function clickEachColor(){
     for( var i = 0, len = selectColorsBox.children.length; i < len; i++ ){
         (function(index){
-            
-
             selectColorsBox.children[i].onclick = function(){
                 addedIndex=index
-            console.log("addedIndex IT ");
-            console.log(addedIndex);
-        
                 selectColorInput[index].click();
   
             }    
@@ -412,21 +386,12 @@ function clickEachColor(){
 }  
 clickEachColor()
 
-
-
-
 document.addEventListener('coloris:pick', event => {
-
-    console.log("addedIndex in ");
-    console.log(addedIndex)
-
     childreNewColor[addedIndex].style.backgroundColor = event.detail.color
     selectColor[addedIndex].style.backgroundColor = event.detail.color
 
     startX( tdsLength );
-    
 });
-
 
 let actionsBox = document.querySelector(".actionsBox");
 let addButtonclick = document.querySelector(".buttonAddColor");
@@ -438,7 +403,6 @@ const randomHexColorCode = () => {
     return '#' + n.slice(0, 6);
 };
   
-
 new Sortable(list, {
     swapThreshold: 1,
     animation: 150,
@@ -472,19 +436,6 @@ new Sortable(deleteColor, {
             //  return false
         }
     }
-    // disabled: function(){
-    //     selectColorsBox = document.getElementById("list");
-    //     selectColorDivs = selectColorsBox.getElementsByClassName("gradientSelectedColor");
-    //     selectColorDivsLength = selectColorDivs.length;
-
-    //     if(  selectColorDivsLength === 2  ){
-    //         console.log( true ) 
-    //         return true
-    //     }else if( selectColorDivsLength > 2 ){
-    //         console.log( false ) 
-    //          return false
-    //     }
-    // }
 });
 
 Coloris({
@@ -492,8 +443,6 @@ Coloris({
     alpha: false,
     format: 'rgb',
 });
-
-
 
 let addColor = () => {
     let newHexTemplate = randomHexColorCode()
@@ -513,8 +462,6 @@ let addColor = () => {
     startX( tdsLength )
     clickEachColor()
 };
-
-
 
 addButtonclick.addEventListener("click", addColor );
 
